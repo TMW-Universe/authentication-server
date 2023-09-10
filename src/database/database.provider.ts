@@ -1,8 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { getEnv } from '../utils/config/get-env';
-import { WeightEntity } from './entities/metrics/weight.entity';
 import { Logger } from '@nestjs/common';
-import { UserSettingsEntity } from './entities/platform/user-settings.entity';
 
 export const databaseProviders = [
   {
@@ -33,7 +31,7 @@ export const databaseProviders = [
         },
         logging: logging ? Logger.log : undefined,
       });
-      sequelize.addModels([WeightEntity, UserSettingsEntity]);
+      sequelize.addModels([]);
       await sequelize.sync({
         alter: true,
         force: false,
@@ -43,13 +41,4 @@ export const databaseProviders = [
   },
 ];
 
-export const entityProviders = {
-  weightEntity: {
-    provide: 'WEIGHT_ENTITY_PROVIDER',
-    useValue: WeightEntity,
-  },
-  userSettingsEntity: {
-    provide: 'USER_SETTINGS_PROVIDER',
-    useValue: UserSettingsEntity,
-  }
-};
+export const entityProviders = {};
