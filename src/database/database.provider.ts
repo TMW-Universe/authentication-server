@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { getEnv } from '../utils/config/get-env';
 import { Logger } from '@nestjs/common';
+import { UserEntity } from './entities/user.entity';
 
 export const databaseProviders = [
   {
@@ -31,7 +32,7 @@ export const databaseProviders = [
         },
         logging: logging ? Logger.log : undefined,
       });
-      sequelize.addModels([]);
+      sequelize.addModels([UserEntity]);
       await sequelize.sync({
         alter: true,
         force: false,
@@ -40,5 +41,3 @@ export const databaseProviders = [
     },
   },
 ];
-
-export const entityProviders = {};
