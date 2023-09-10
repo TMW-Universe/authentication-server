@@ -1,0 +1,16 @@
+version: '3'
+name: tmwu_authentication
+services:
+  api:
+    container_name: tmwu_authentication
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - '5001:5001'
+    volumes:
+      - ./src:/app/src
+    expose:
+      - '5001'
