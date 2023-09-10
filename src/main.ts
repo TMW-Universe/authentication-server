@@ -24,7 +24,7 @@ async function bootstrap() {
   }
 
   // DTO Validation
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   // Set the base route as /api
   app.setGlobalPrefix('api');
