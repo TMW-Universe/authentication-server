@@ -6,7 +6,7 @@ import { Throttle } from '@nestjs/throttler';
 export class KeysController {
   constructor(private readonly keysService: KeysService) {}
 
-  @Throttle(1, 10)
+  @Throttle(30, 10)
   @Get('public-key')
   async getPublicKey() {
     return await this.keysService.getPublicKey();
