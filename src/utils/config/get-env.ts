@@ -39,6 +39,11 @@ export const getEnv = (): EnvFile => {
       logging: getBooleanFromString(env.DATABASE_LOGGING, false),
     },
     jwtSecret: env.JWT_SECRET,
+    allowedDomains: JSON.parse(env.ALLOWED_DOMAINS),
+    allowSelfPasswordRecovery: getBooleanFromString(
+      env.ALLOW_SELF_PASSWORD_RECOVERY,
+      true,
+    ),
     openApi: getBooleanFromString(env.OPEN_API),
     cors: getBooleanFromString(env.CORS, true),
     port: getNumberFromString(env.PORT, 5000),
@@ -58,6 +63,8 @@ interface EnvFile {
   };
 
   jwtSecret: string;
+  allowedDomains: string[];
+  allowSelfPasswordRecovery: boolean;
 
   openApi: boolean;
   cors: boolean;
@@ -80,4 +87,7 @@ class RawEnvFile {
   CORS?: string;
   PORT?: string;
   HELMET?: string;
+
+  ALLOWED_DOMAINS?: string;
+  ALLOW_SELF_PASSWORD_RECOVERY?: string;
 }

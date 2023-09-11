@@ -1,4 +1,5 @@
 import {
+  IsFQDN,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -23,4 +24,9 @@ export class LoginDTO {
   @MinLength(6)
   @MaxLength(6)
   twoFaCode?: string;
+
+  @IsString()
+  @MaxLength(64)
+  @IsFQDN()
+  domain: string;
 }
