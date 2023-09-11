@@ -29,6 +29,7 @@ export const getEnv = (): EnvFile => {
   const env = process.env as unknown as RawEnvFile;
 
   return {
+    hostname: env.HOSTNAME,
     database: {
       user: env.DATABASE_USER,
       password: env.DATABASE_PASSWORD,
@@ -38,7 +39,8 @@ export const getEnv = (): EnvFile => {
       schema: getOptionalString(env.DATABASE_SCHEMA, 'tmwu_auth'),
       logging: getBooleanFromString(env.DATABASE_LOGGING, false),
     },
-    jwtSecret: env.JWT_SECRET,
+    jwtPublicKey: env.JWT_PUBLIC_KEY,
+    jwtPrivateKey: env.JWT_PRIVATE_KEY,
     allowedDomains: JSON.parse(env.ALLOWED_DOMAINS),
     allowSelfPasswordRecovery: getBooleanFromString(
       env.ALLOW_SELF_PASSWORD_RECOVERY,
@@ -52,6 +54,8 @@ export const getEnv = (): EnvFile => {
 };
 
 interface EnvFile {
+  hostname: string;
+
   database: {
     user: string;
     password: string;
@@ -62,7 +66,9 @@ interface EnvFile {
     logging: boolean;
   };
 
-  jwtSecret: string;
+  jwtPublicKey: string;
+  jwtPrivateKey: string;
+
   allowedDomains: string[];
   allowSelfPasswordRecovery: boolean;
 
@@ -73,6 +79,8 @@ interface EnvFile {
 }
 
 class RawEnvFile {
+  HOSTNAME: string;
+
   DATABASE_USER: string;
   DATABASE_PASSWORD: string;
   DATABASE_NAME: string;
@@ -81,7 +89,8 @@ class RawEnvFile {
   DATABASE_SCHEMA?: string;
   DATABASE_LOGGING?: string;
 
-  JWT_SECRET: string;
+  JWT_PUBLIC_KEY: string;
+  JWT_PRIVATE_KEY: string;
 
   OPEN_API?: string;
   CORS?: string;

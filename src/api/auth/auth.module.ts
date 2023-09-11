@@ -11,17 +11,20 @@ import { getEnv } from 'src/utils/config/get-env';
   imports: [
     JwtModule.registerAsync({
       useFactory: () => {
-        const { jwtSecret } = getEnv();
-
-        if (jwtSecret.length < 32)
-          throw new Error(
-            "JWT Secret is not secure enought. It's length must be at least 32 characters.",
-          );
+        const {
+          jwtPrivateKey: privateKey,
+          jwtPublicKey: publicKey,
+          hostname,
+        } = getEnv();
 
         return {
-          global: true,
-          signOptions: { expiresIn: '45d' },
-          secret: jwtSecret,
+          signOptions: {
+            expiresIn: '45d',
+            algorithm: 'RS512',
+            issuer: hostname,
+          },
+          privateKey,
+          publicKey,
         };
       },
     }),
