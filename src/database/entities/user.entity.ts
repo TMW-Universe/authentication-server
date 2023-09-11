@@ -17,7 +17,7 @@ export interface UserAttributes extends ITimestamps {
 
   username: string;
   password: string;
-  twoFaEnabled: boolean;
+  twoFaToken: boolean;
   email: string;
 }
 export interface UserCreateAttributes
@@ -52,7 +52,7 @@ export class UserEntity
 
   @AllowNull(false)
   @Column(DataTypes.BOOLEAN)
-  twoFaEnabled: boolean;
+  twoFaToken: boolean;
 
   @AllowNull(false)
   @Column(DataTypes.STRING(64))
