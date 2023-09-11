@@ -50,8 +50,8 @@ export class UserEntity
   @Column(DataTypes.STRING(128))
   password: string;
 
-  @AllowNull(false)
-  @Column(DataTypes.BOOLEAN)
+  @AllowNull(true)
+  @Column(DataTypes.STRING(128))
   twoFaToken: boolean;
 
   @AllowNull(false)

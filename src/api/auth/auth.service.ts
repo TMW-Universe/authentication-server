@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/database/repositories/user.repository';
 import { WrongCredentialsException } from 'src/errors/auth/wrong-credentials.exception';
+import { compareHashWithSalt } from 'src/utils/cryptography/cryptography';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,7 @@ export class AuthService {
       credentials.username,
     );
 
+    // If user is not found
     if (!user) throw new WrongCredentialsException();
 
     if (user.getDataValue('twoFaToken')) {
@@ -25,5 +27,13 @@ export class AuthService {
         return { requires2Fa: true };
       }
     }
+
+    if (
+      compareHashWithSalt(user.getDataValue('password'), credentials.password)
+    ) {
+      return {
+        accessToken: 'TOKEN',
+      };
+    } else throw new WrongCredentialsException();
   }
 }
