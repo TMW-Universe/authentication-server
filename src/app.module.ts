@@ -6,7 +6,7 @@ import { ApiModule } from './api/api.module';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
-      ttl: 60,
+      ttl: 60000,
       limit: 60,
     }),
     DatabaseModule,
