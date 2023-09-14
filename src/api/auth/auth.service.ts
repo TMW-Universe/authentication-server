@@ -51,6 +51,10 @@ export class AuthService {
         user: {
           id: user.getDataValue('id'),
           username: user.getDataValue('username'),
+          email: user.getDataValue('email'),
+          name: user.getDataValue('name'),
+          firstSurname: user.getDataValue('fisrtSurname'),
+          secondSurname: user.getDataValue('secondSurname'),
         },
       };
 

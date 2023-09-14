@@ -19,6 +19,10 @@ export interface UserAttributes extends ITimestamps {
   password: string;
   twoFaToken: boolean;
   email: string;
+
+  name: string;
+  fisrtSurname: string;
+  secondSurname: string;
 }
 export interface UserCreateAttributes
   extends OmitIdAndTimestamps<UserAttributes> {}
@@ -57,4 +61,16 @@ export class UserEntity
   @AllowNull(false)
   @Column(DataTypes.STRING(64))
   email: string;
+
+  @AllowNull(false)
+  @Column(DataTypes.STRING(32))
+  name: string;
+
+  @AllowNull(false)
+  @Column(DataTypes.STRING(64))
+  fisrtSurname: string;
+
+  @AllowNull(false)
+  @Column(DataTypes.STRING(64))
+  secondSurname: string;
 }
