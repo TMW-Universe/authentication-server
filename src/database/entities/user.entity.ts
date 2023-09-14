@@ -21,7 +21,7 @@ export interface UserAttributes extends ITimestamps {
   email: string;
 
   name: string;
-  fisrtSurname: string;
+  firstSurname: string;
   secondSurname: string;
 }
 export interface UserCreateAttributes
@@ -68,7 +68,7 @@ export class UserEntity
 
   @AllowNull(false)
   @Column(DataTypes.STRING(64))
-  fisrtSurname: string;
+  firstSurname: string;
 
   @AllowNull(false)
   @Column(DataTypes.STRING(64))
