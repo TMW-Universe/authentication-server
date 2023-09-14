@@ -4,7 +4,6 @@ import { AuthController } from './auth.controller';
 import { UserRepository } from 'src/database/repositories/user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { getEnv } from 'src/utils/config/get-env';
-import { TransferCredentialsModule } from './transfer-credentials/transfer-credentials.module';
 
 @Module({
   providers: [AuthService, UserRepository],
@@ -29,7 +28,6 @@ import { TransferCredentialsModule } from './transfer-credentials/transfer-crede
         };
       },
     }),
-    TransferCredentialsModule,
   ],
 })
 export class AuthModule {}
