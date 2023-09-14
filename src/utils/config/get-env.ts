@@ -50,6 +50,7 @@ export const getEnv = (): EnvFile => {
     cors: getBooleanFromString(env.CORS, true),
     port: getNumberFromString(env.PORT, 5000),
     helmet: getBooleanFromString(env.HELMET, true),
+    dev: getBooleanFromString(env.DEV, false),
   };
 };
 
@@ -76,6 +77,8 @@ interface EnvFile {
   cors: boolean;
   port: number;
   helmet: boolean;
+
+  dev: boolean;
 }
 
 class RawEnvFile {
@@ -99,4 +102,6 @@ class RawEnvFile {
 
   ALLOWED_DOMAINS?: string;
   ALLOW_SELF_PASSWORD_RECOVERY?: string;
+
+  DEV?: string;
 }

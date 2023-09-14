@@ -5,7 +5,9 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateIf,
 } from 'class-validator';
+import { getEnv } from 'src/utils/config/get-env';
 
 export class LoginDTO {
   @IsString()
@@ -27,6 +29,7 @@ export class LoginDTO {
 
   @IsString()
   @MaxLength(64)
+  @ValidateIf(() => !getEnv().dev)
   @IsFQDN()
   domain: string;
 }
