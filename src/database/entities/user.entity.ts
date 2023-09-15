@@ -3,6 +3,7 @@ import {
   AllowNull,
   Column,
   Default,
+  HasOne,
   Model,
   PrimaryKey,
   Table,
@@ -11,6 +12,7 @@ import { OmitIdAndTimestamps } from 'src/types/database/omit-id-and-timestamps.t
 import { OmitTimestamps } from 'src/types/database/omit-timestamps.type';
 import { ITimestamps } from 'src/types/database/timestamps.interface';
 import { uuid } from 'src/types/generic/uuid.type';
+import { UserProfileEntity } from './user-profile.entity';
 
 export interface UserAttributes extends ITimestamps {
   id: uuid;
@@ -18,11 +20,9 @@ export interface UserAttributes extends ITimestamps {
   username: string;
   password: string;
   twoFaToken: boolean;
-  email: string;
 
-  name: string;
-  firstSurname: string;
-  secondSurname: string;
+  // Associations
+  userProfile?: UserProfileEntity;
 }
 export interface UserCreateAttributes
   extends OmitIdAndTimestamps<UserAttributes> {}
@@ -58,19 +58,8 @@ export class UserEntity
   @Column(DataTypes.STRING(128))
   twoFaToken: boolean;
 
-  @AllowNull(false)
-  @Column(DataTypes.STRING(64))
-  email: string;
+  // Associations
 
-  @AllowNull(false)
-  @Column(DataTypes.STRING(32))
-  name: string;
-
-  @AllowNull(false)
-  @Column(DataTypes.STRING(64))
-  firstSurname: string;
-
-  @AllowNull(false)
-  @Column(DataTypes.STRING(64))
-  secondSurname: string;
+  @HasOne(() => UserProfileEntity)
+  userProfile?: UserProfileEntity;
 }

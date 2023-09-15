@@ -2,6 +2,8 @@ import { RepositoryOptions } from 'src/types/database/repository/repository-opti
 import { UserEntity } from '../entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { Op } from 'sequelize';
+import { uuid } from 'src/types/generic/uuid.type';
+import { UserProfileEntity } from '../entities/user-profile.entity';
 
 @Injectable()
 export class UserRepository {
@@ -9,11 +11,14 @@ export class UserRepository {
     return await UserEntity.findOne({ where: { username }, ...options });
   }
 
-  async findUserById(userId: string, options?: RepositoryOptions) {
-    return await UserEntity.findOne({ where: { id: userId }, ...options });
+  async findUserById(userId: uuid, options?: RepositoryOptions) {
+    return await UserEntity.findOne({
+      where: { id: userId },
+      ...options,
+    });
   }
 
-  async getUsersById(usersId: string[], options?: RepositoryOptions) {
+  async getUsersById(usersId: uuid[], options?: RepositoryOptions) {
     return await UserEntity.findAll({
       where: {
         id: {
