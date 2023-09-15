@@ -10,9 +10,8 @@ export class UsersService {
 
   async getUserProfile(userId: string) {
     const user = (await this.getUserAndProfileById(userId)).get();
-    const profileEntity = user.userProfile;
-    if (!profileEntity) throw new InternalServerErrorException();
-    const profile = profileEntity.get();
+    if (!user) throw new InternalServerErrorException();
+    const profile = user.userProfile.get();
 
     return {
       id: user.id,
@@ -30,7 +29,7 @@ export class UsersService {
 
   async getUserAndProfileById(userId: uuid) {
     return await this.usersRepository.findUserById(userId, {
-      include: [UserProfileEntity],
+      include: [{ model: UserProfileEntity, required: true }],
     });
   }
 }
