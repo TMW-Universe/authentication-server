@@ -6,6 +6,7 @@ import { DomainsModule } from './domains/domains.module';
 import { ThirdPartyModule } from './third-party/third-party.module';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard } from '@nestjs/throttler';
+import { UsersModule } from './users/users.module';
 
 @Module({
   controllers: [ApiController],
@@ -16,6 +17,6 @@ import { ThrottlerGuard } from '@nestjs/throttler';
       useClass: ThrottlerGuard,
     },
   ],
-  imports: [AuthModule, DomainsModule, ThirdPartyModule],
+  imports: [AuthModule, DomainsModule, ThirdPartyModule, UsersModule],
 })
 export class ApiModule {}

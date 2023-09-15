@@ -7,4 +7,8 @@ export class UserRepository {
   async findUserByUsername(username: string, options?: RepositoryOptions) {
     return await UserEntity.findOne({ where: { username }, ...options });
   }
+
+  async findUserById(userId: string, options?: RepositoryOptions) {
+    return await UserEntity.findOne({ where: { id: userId }, ...options });
+  }
 }
