@@ -48,14 +48,7 @@ export class AuthService {
 
       const payload = {
         domains: [credentials.domain],
-        user: {
-          id: user.getDataValue('id'),
-          username: user.getDataValue('username'),
-          email: user.getDataValue('email'),
-          name: user.getDataValue('name'),
-          firstSurname: user.getDataValue('firstSurname'),
-          secondSurname: user.getDataValue('secondSurname'),
-        },
+        userId: user.getDataValue('id'),
       };
 
       return {
