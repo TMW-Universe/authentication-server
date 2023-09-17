@@ -7,7 +7,7 @@ import { getEnv } from 'src/utils/config/get-env';
 import { DomainNotAllowedException } from 'src/errors/domain/domain-not-allowed.exception';
 import { LogRepository } from 'src/database/repositories/logs/log.repository';
 import { LogType } from 'src/database/entities/logs/log.entity';
-import { uuid } from 'src/types/generic/uuid.type';
+import { uuid } from '@tmw-universe/tmw-universe-types';
 
 @Injectable()
 export class AuthService {
