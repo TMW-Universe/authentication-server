@@ -3,8 +3,11 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
+  Ip,
   Param,
   Post,
+  Req,
+  Request,
 } from '@nestjs/common';
 import { LoginDTO } from './dtos/login.dto';
 import { AuthService } from './auth.service';
@@ -19,7 +22,10 @@ export class AuthController {
   @Throttle({ default: { limit: 7, ttl: 60000 } })
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  async login(@Body() body: LoginDTO) {
-    return await this.authService.login(body);
+  async login(@Body() body: LoginDTO, @Req() req: Request, @Ip() ip: string) {
+    return await this.authService.login(body, {
+      request: req,
+      ip,
+    });
   }
 }

@@ -3,6 +3,7 @@ import { getEnv } from '../utils/config/get-env';
 import { Logger } from '@nestjs/common';
 import { UserEntity } from './entities/user.entity';
 import { UserProfileEntity } from './entities/user-profile.entity';
+import { LogEntity } from './entities/logs/log.entity';
 
 export const databaseProviders = [
   {
@@ -33,7 +34,7 @@ export const databaseProviders = [
         },
         logging: logging ? console.log : undefined,
       });
-      sequelize.addModels([UserProfileEntity, UserEntity]);
+      sequelize.addModels([LogEntity, UserProfileEntity, UserEntity]);
       await sequelize.sync({
         alter: true,
         force: false,

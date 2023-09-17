@@ -4,9 +4,10 @@ import { AuthController } from './auth.controller';
 import { UserRepository } from 'src/database/repositories/user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { getEnv } from 'src/utils/config/get-env';
+import { LogRepository } from 'src/database/repositories/logs/log.repository';
 
 @Module({
-  providers: [AuthService, UserRepository],
+  providers: [AuthService, UserRepository, LogRepository],
   controllers: [AuthController],
   imports: [
     JwtModule.registerAsync({

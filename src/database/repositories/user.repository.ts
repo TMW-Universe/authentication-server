@@ -3,7 +3,6 @@ import { UserEntity } from '../entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { Op } from 'sequelize';
 import { uuid } from 'src/types/generic/uuid.type';
-import { UserProfileEntity } from '../entities/user-profile.entity';
 
 @Injectable()
 export class UserRepository {
