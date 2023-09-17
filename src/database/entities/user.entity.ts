@@ -15,6 +15,7 @@ import { ITimestamps } from 'src/types/database/timestamps.interface';
 import { uuid } from 'src/types/generic/uuid.type';
 import { UserProfileEntity } from './user-profile.entity';
 import { LogEntity } from './logs/log.entity';
+import { UserPreferencesEntity } from './user-preferences.entity';
 
 export interface UserAttributes extends ITimestamps {
   id: uuid;
@@ -26,6 +27,7 @@ export interface UserAttributes extends ITimestamps {
   // Associations
   userProfile?: UserProfileEntity;
   logs?: LogEntity[];
+  userPreferences?: UserPreferencesEntity;
 }
 export interface UserCreateAttributes
   extends OmitIdAndTimestamps<UserAttributes> {}
@@ -68,4 +70,7 @@ export class UserEntity
 
   @HasMany(() => LogEntity)
   logs?: LogEntity[];
+
+  @HasOne(() => UserPreferencesEntity)
+  userPreferences?: UserPreferencesEntity;
 }

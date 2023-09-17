@@ -1,3 +1,5 @@
+import { UserPreferencesAttributes } from 'src/database/entities/user-preferences.entity';
+
 export interface UserProfileModel {
   id: string;
   name: string;
@@ -5,4 +7,5 @@ export interface UserProfileModel {
   secondSurname: string;
   email: string;
   username: string;
+  preferences: Omit<UserPreferencesAttributes, 'id' | 'user' | 'userId'>;
 }

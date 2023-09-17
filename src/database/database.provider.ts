@@ -4,6 +4,7 @@ import { Logger } from '@nestjs/common';
 import { UserEntity } from './entities/user.entity';
 import { UserProfileEntity } from './entities/user-profile.entity';
 import { LogEntity } from './entities/logs/log.entity';
+import { UserPreferencesEntity } from './entities/user-preferences.entity';
 
 export const databaseProviders = [
   {
@@ -34,7 +35,12 @@ export const databaseProviders = [
         },
         logging: logging ? console.log : undefined,
       });
-      sequelize.addModels([LogEntity, UserProfileEntity, UserEntity]);
+      sequelize.addModels([
+        LogEntity,
+        UserProfileEntity,
+        UserPreferencesEntity,
+        UserEntity,
+      ]);
       await sequelize.sync({
         alter: true,
         force: false,
