@@ -7,5 +7,8 @@ export interface UserProfileModel {
   secondSurname: string;
   email: string;
   username: string;
-  preferences: Omit<UserPreferencesAttributes, 'id' | 'user' | 'userId'>;
+  preferences: Omit<
+    UserPreferencesAttributes,
+    'id' | 'user' | 'userId' | 'createdAt' | 'updatedAt'
+  >;
 }

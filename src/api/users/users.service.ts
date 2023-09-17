@@ -14,12 +14,7 @@ export class UsersService {
     if (!user) throw new InternalServerErrorException();
     const profile = user.userProfile.get();
 
-    const {
-      userId: _userId,
-      user: _user,
-      id: _id,
-      ...preferences
-    } = user.userPreferences.get();
+    const preferences = user.userPreferences?.get();
 
     return {
       id: user.id,
@@ -28,7 +23,13 @@ export class UsersService {
       secondSurname: profile.secondSurname,
       email: profile.email,
       username: user.username,
-      preferences,
+      preferences: {
+        color: preferences?.color,
+        theme: preferences?.theme,
+        language: preferences?.language,
+        currency: preferences?.currency,
+        weightUnit: preferences?.weightUnit,
+      },
     } as UserProfileModel;
   }
 
