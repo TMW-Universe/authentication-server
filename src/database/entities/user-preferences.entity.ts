@@ -9,7 +9,6 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { uuid } from 'src/types/generic/uuid.type';
 import { UserEntity } from './user.entity';
 import {
   Currency,
@@ -19,6 +18,7 @@ import {
   OmitTimestamps,
   Theme,
   WeightUnit,
+  uuid,
 } from '@tmw-universe/tmw-universe-types';
 
 export interface UserPreferencesAttributes

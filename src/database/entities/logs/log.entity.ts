@@ -8,13 +8,13 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { uuid } from 'src/types/generic/uuid.type';
 import { UserEntity } from '../user.entity';
 import { DataTypes } from 'sequelize';
 import {
   ITimestamps,
   OmitIdAndTimestamps,
   OmitTimestamps,
+  uuid,
 } from '@tmw-universe/tmw-universe-types';
 
 export interface LogAttributes extends Omit<ITimestamps, 'deletedAt'> {

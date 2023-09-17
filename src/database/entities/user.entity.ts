@@ -9,7 +9,6 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { uuid } from 'src/types/generic/uuid.type';
 import { UserProfileEntity } from './user-profile.entity';
 import { LogEntity } from './logs/log.entity';
 import { UserPreferencesEntity } from './user-preferences.entity';
@@ -17,6 +16,7 @@ import {
   ITimestamps,
   OmitIdAndTimestamps,
   OmitTimestamps,
+  uuid,
 } from '@tmw-universe/tmw-universe-types';
 
 export interface UserAttributes extends ITimestamps {

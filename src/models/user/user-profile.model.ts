@@ -1,7 +1,8 @@
+import { uuid } from '@tmw-universe/tmw-universe-types';
 import { UserPreferencesAttributes } from 'src/database/entities/user-preferences.entity';
 
 export interface UserProfileModel {
-  id: string;
+  id: uuid;
   name: string;
   firstSurname: string;
   secondSurname: string;

@@ -2,7 +2,7 @@ import { RepositoryOptions } from 'src/types/database/repository/repository-opti
 import { UserEntity } from '../entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { Op } from 'sequelize';
-import { uuid } from 'src/types/generic/uuid.type';
+import { uuid } from '@tmw-universe/tmw-universe-types';
 
 @Injectable()
 export class UserRepository {

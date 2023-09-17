@@ -1,9 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { uuid } from '@tmw-universe/tmw-universe-types';
 import { UserPreferencesEntity } from 'src/database/entities/user-preferences.entity';
 import { UserProfileEntity } from 'src/database/entities/user-profile.entity';
 import { UserRepository } from 'src/database/repositories/user.repository';
 import { UserProfileModel } from 'src/models/user/user-profile.model';
-import { uuid } from 'src/types/generic/uuid.type';
 
 @Injectable()
 export class UsersService {
