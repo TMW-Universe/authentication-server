@@ -9,16 +9,17 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { IIdAndTimestamps } from 'src/types/database/id-and-timestamps.interface';
-import { OmitIdAndTimestamps } from 'src/types/database/omit-id-and-timestamps.type';
-import { OmitTimestamps } from 'src/types/database/omit-timestamps.type';
 import { uuid } from 'src/types/generic/uuid.type';
-import { Currency } from 'src/types/user/preferences/currency.enum';
-import { Language } from 'src/types/user/preferences/language.enum';
-import { Theme } from 'src/types/user/preferences/theme.enum';
-import { WeightUnit } from 'src/types/user/preferences/weight-unit.enum';
 import { UserEntity } from './user.entity';
-import { ITimestamps } from 'src/types/database/timestamps.interface';
+import {
+  Currency,
+  ITimestamps,
+  Language,
+  OmitIdAndTimestamps,
+  OmitTimestamps,
+  Theme,
+  WeightUnit,
+} from '@tmw-universe/tmw-universe-types';
 
 export interface UserPreferencesAttributes
   extends Omit<ITimestamps, 'deletedAt'> {

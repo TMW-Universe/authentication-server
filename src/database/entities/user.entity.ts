@@ -9,13 +9,15 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { OmitIdAndTimestamps } from 'src/types/database/omit-id-and-timestamps.type';
-import { OmitTimestamps } from 'src/types/database/omit-timestamps.type';
-import { ITimestamps } from 'src/types/database/timestamps.interface';
 import { uuid } from 'src/types/generic/uuid.type';
 import { UserProfileEntity } from './user-profile.entity';
 import { LogEntity } from './logs/log.entity';
 import { UserPreferencesEntity } from './user-preferences.entity';
+import {
+  ITimestamps,
+  OmitIdAndTimestamps,
+  OmitTimestamps,
+} from '@tmw-universe/tmw-universe-types';
 
 export interface UserAttributes extends ITimestamps {
   id: uuid;
