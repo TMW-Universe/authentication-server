@@ -36,7 +36,7 @@ export const getEnv = (): EnvFile => {
       name: env.DATABASE_NAME,
       host: env.DATABASE_HOST,
       port: getNumberFromString(env.DATABASE_PORT, 1433),
-      schema: getOptionalString(env.DATABASE_SCHEMA, 'tmwu_auth'),
+      schema: getOptionalString(env.DATABASE_SCHEMA, 'tmwu_users'),
       logging: getBooleanFromString(env.DATABASE_LOGGING, false),
     },
     jwtPublicKey: env.JWT_PUBLIC_KEY,
