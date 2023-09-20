@@ -1,4 +1,4 @@
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { DatabaseModule } from './database/database.module';
 import { Module } from '@nestjs/common';
 import { ApiModule } from './api/api.module';
@@ -28,6 +28,10 @@ import { getEnv } from './utils/config/get-env';
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })
