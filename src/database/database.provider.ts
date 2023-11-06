@@ -22,7 +22,7 @@ export const databaseProviders = [
         },
       } = getEnv();
       const sequelize = new Sequelize({
-        dialect: 'mssql',
+        dialect: 'mysql',
         schema,
         host,
         port,
