@@ -33,10 +33,9 @@ export const getEnv = (): EnvFile => {
     database: {
       user: env.DATABASE_USER,
       password: env.DATABASE_PASSWORD,
-      name: env.DATABASE_NAME,
+      name: getOptionalString(env.DATABASE_NAME, 'tmwu_authentication'),
       host: env.DATABASE_HOST,
       port: getNumberFromString(env.DATABASE_PORT, 1433),
-      schema: getOptionalString(env.DATABASE_SCHEMA, 'tmwu_users'),
       logging: getBooleanFromString(env.DATABASE_LOGGING, false),
     },
     jwtPublicKey: env.JWT_PUBLIC_KEY,
@@ -63,7 +62,6 @@ interface EnvFile {
     name: string;
     host: string;
     port: number;
-    schema: string;
     logging: boolean;
   };
 
@@ -89,7 +87,6 @@ class RawEnvFile {
   DATABASE_NAME: string;
   DATABASE_HOST: string;
   DATABASE_PORT?: string;
-  DATABASE_SCHEMA?: string;
   DATABASE_LOGGING?: string;
 
   JWT_PUBLIC_KEY: string;

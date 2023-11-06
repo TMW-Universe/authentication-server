@@ -17,13 +17,11 @@ export const databaseProviders = [
           password,
           name: database,
           port,
-          schema,
           logging,
         },
       } = getEnv();
       const sequelize = new Sequelize({
         dialect: 'mysql',
-        schema,
         host,
         port,
         username,
