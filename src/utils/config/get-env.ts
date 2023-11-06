@@ -33,7 +33,7 @@ export const getEnv = (): EnvFile => {
     database: {
       user: env.DATABASE_USER,
       password: env.DATABASE_PASSWORD,
-      name: getOptionalString(env.DATABASE_NAME, 'tmwu_authentication'),
+      name: getOptionalString(env.DATABASE_NAME, 'tmwu_users'),
       host: env.DATABASE_HOST,
       port: getNumberFromString(env.DATABASE_PORT, 3306),
       logging: getBooleanFromString(env.DATABASE_LOGGING, false),
