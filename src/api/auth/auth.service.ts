@@ -6,8 +6,8 @@ import { JwtService } from '@nestjs/jwt';
 import { getEnv } from 'src/utils/config/get-env';
 import { DomainNotAllowedException } from 'src/errors/domain/domain-not-allowed.exception';
 import { LogRepository } from 'src/database/repositories/logs/log.repository';
-import { LogType } from 'src/database/entities/logs/log.entity';
 import { uuid } from '@tmw-universe/tmw-universe-types';
+import { LogType } from 'src/types/logs/log-type.enum';
 
 @Injectable()
 export class AuthService {
@@ -40,12 +40,10 @@ export class AuthService {
     // If user is not found
     if (!user) throw new WrongCredentialsException();
 
-    if (
-      compareHashWithSalt(user.getDataValue('password'), credentials.password)
-    ) {
+    if (compareHashWithSalt(user.password, credentials.password)) {
       // First check for 2FA
 
-      if (user.getDataValue('twoFaToken')) {
+      if (user.twoFaToken) {
         // If 2FA is enabled
 
         if (!credentials.twoFaCode) {
@@ -55,18 +53,13 @@ export class AuthService {
       }
 
       // Log sign in
-      await this.log(
-        LogType.LOGIN,
-        user.getDataValue('id'),
-        req.request,
-        req.ip,
-      );
+      await this.log(LogType.LOGIN, user.id, req.request, req.ip);
 
       // Generate token
 
       const payload = {
         domains: [credentials.domain],
-        userId: user.getDataValue('id'),
+        userId: user.id,
       };
 
       return {

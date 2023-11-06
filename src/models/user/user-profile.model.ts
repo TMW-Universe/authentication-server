@@ -1,5 +1,5 @@
+import { UserPreference } from '@prisma/client';
 import { uuid } from '@tmw-universe/tmw-universe-types';
-import { UserPreferencesAttributes } from 'src/database/entities/user-preferences.entity';
 
 export interface UserProfileModel {
   id: uuid;
@@ -9,7 +9,7 @@ export interface UserProfileModel {
   email: string;
   username: string;
   preferences: Omit<
-    UserPreferencesAttributes,
+    UserPreference,
     'id' | 'user' | 'userId' | 'createdAt' | 'updatedAt'
   >;
 }

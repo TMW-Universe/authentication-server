@@ -1,6 +1,9 @@
-import { Includeable, Transaction } from 'sequelize';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { DefaultArgs } from '@prisma/client/runtime/library';
 
 export interface RepositoryOptions {
-  transaction?: Transaction;
-  include?: Includeable[];
+  transaction?: Omit<
+    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+  >;
 }

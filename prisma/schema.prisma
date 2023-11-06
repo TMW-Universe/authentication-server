@@ -1,0 +1,67 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String           @id @default(uuid())
+  username       String           @unique @db.VarChar(16)
+  password       String           @db.VarChar(128)
+  twoFaToken     String?          @db.VarChar(128)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  deletedAt      DateTime?
+  UserProfile    UserProfile[]
+  Log            Log[]
+  UserPreference UserPreference[]
+
+  @@index([deletedAt])
+}
+
+model UserProfile {
+  id            String   @id @default(uuid())
+  email         String   @db.VarChar(64)
+  name          String   @db.VarChar(32)
+  firstSurname  String   @db.VarChar(64)
+  secondSurname String   @db.VarChar(64)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  address   String   @db.VarChar(80)
+  userAgent String   @db.VarChar(256)
+  origin    String   @db.VarChar(256)
+  type      String   @db.VarChar(20)
+  createdAt DateTime @default(now())
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@index([createdAt])
+}
+
+model UserPreference {
+  id String @id @default(uuid())
+
+  language   String @db.VarChar(5)
+  weightUnit String @db.VarChar(2)
+  currency   String @db.VarChar(3)
+  color      String @db.VarChar(7)
+  theme      String @db.VarChar(5)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}

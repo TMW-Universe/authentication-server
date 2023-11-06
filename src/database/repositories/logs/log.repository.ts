@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import {
-  LogCreateAttributes,
-  LogEntity,
-} from 'src/database/entities/logs/log.entity';
+import { Prisma } from '@prisma/client';
+import { DatabaseService } from 'src/database/database.service';
 import { RepositoryOptions } from 'src/types/database/repository/repository-options.interface';
 
 @Injectable()
 export class LogRepository {
-  async create(log: LogCreateAttributes, options?: RepositoryOptions) {
-    return await LogEntity.create(log, options);
+  constructor(private readonly databaseService: DatabaseService) {}
+
+  async create(
+    log: Prisma.LogUncheckedCreateInput,
+    options?: RepositoryOptions,
+  ) {
+    await (options?.transaction ?? this.databaseService).log.create({
+      data: log,
+    });
   }
 }

@@ -1,7 +1,5 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { uuid } from '@tmw-universe/tmw-universe-types';
-import { UserPreferencesEntity } from 'src/database/entities/user-preferences.entity';
-import { UserProfileEntity } from 'src/database/entities/user-profile.entity';
 import { UserRepository } from 'src/database/repositories/user.repository';
 import { UserProfileModel } from 'src/models/user/user-profile.model';
 
@@ -10,11 +8,11 @@ export class UsersService {
   constructor(private readonly usersRepository: UserRepository) {}
 
   async getUserProfile(userId: string) {
-    const user = (await this.getUserAndProfileAndPreferencesById(userId)).get();
+    const user = await this.getUserAndProfileAndPreferencesById(userId);
     if (!user) throw new InternalServerErrorException();
-    const profile = user.userProfile.get();
+    const profile = user.UserProfile[0];
 
-    const preferences = user.userPreferences?.get();
+    const preferences = user.UserPreference[0];
 
     return {
       id: user.id,
@@ -38,11 +36,8 @@ export class UsersService {
   }
 
   async getUserAndProfileAndPreferencesById(userId: uuid) {
-    return await this.usersRepository.findUserById(userId, {
-      include: [
-        { model: UserProfileEntity, required: true },
-        { model: UserPreferencesEntity, required: false },
-      ],
-    });
+    return await this.usersRepository.findUserByIdIncludingProfileAndPreferences(
+      userId,
+    );
   }
 }
