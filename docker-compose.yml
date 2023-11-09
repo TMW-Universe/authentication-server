@@ -1,8 +1,8 @@
 version: '3'
-name: tmwu_authentication_api
+name: auth_api
 services:
   api:
-    container_name: tmwu_authentication_api
+    container_name: auth_api
     build:
       context: .
       dockerfile: Dockerfile
