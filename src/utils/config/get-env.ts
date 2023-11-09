@@ -40,7 +40,7 @@ export const getEnv = (): EnvFile => {
     ),
     openApi: getBooleanFromString(env.OPEN_API),
     cors: getBooleanFromString(env.CORS, true),
-    port: getNumberFromString(env.PORT, 5000),
+    port: getNumberFromString(env.PORT, 6000),
     helmet: getBooleanFromString(env.HELMET, true),
     dev: getBooleanFromString(env.DEV, false),
   };
