@@ -1,0 +1,9 @@
+{
+  "name": "tmwu_authentication",
+  "longName": "TMW Universe Authentication API",
+  "version": "0.0.1",
+  "description": "TMW Universe Authentication API",
+  "author": "TheMineWay",
+  "private": true,
+  "license": "MIT"
+}

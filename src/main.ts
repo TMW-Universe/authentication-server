@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as pj from '../package.json';
+import * as pj from './info.json';
 import { getEnv } from './utils/config/get-env';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppModule } from './app.module';
