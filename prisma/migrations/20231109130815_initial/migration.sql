@@ -20,10 +20,12 @@ CREATE TABLE `UserProfile` (
     `name` VARCHAR(32) NOT NULL,
     `firstSurname` VARCHAR(64) NOT NULL,
     `secondSurname` VARCHAR(64) NOT NULL,
+    `birthDate` DATE NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `UserProfile_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -47,11 +49,14 @@ CREATE TABLE `UserPreference` (
     `language` VARCHAR(5) NOT NULL,
     `weightUnit` VARCHAR(2) NOT NULL,
     `currency` VARCHAR(3) NOT NULL,
-    `color` VARCHAR(7) NOT NULL,
+    `color` VARCHAR(7) NULL,
     `theme` VARCHAR(5) NOT NULL,
+    `dateFormat` VARCHAR(16) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `UserPreference_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -60,3 +65,6 @@ ALTER TABLE `UserProfile` ADD CONSTRAINT `UserProfile_userId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `Log` ADD CONSTRAINT `Log_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `UserPreference` ADD CONSTRAINT `UserPreference_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

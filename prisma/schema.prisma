@@ -1,6 +1,5 @@
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -29,6 +28,7 @@ model UserProfile {
   name          String   @db.VarChar(32)
   firstSurname  String   @db.VarChar(64)
   secondSurname String   @db.VarChar(64)
+  birthDate     DateTime @db.Date()
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -53,11 +53,12 @@ model Log {
 model UserPreference {
   id String @id @default(uuid())
 
-  language   String @db.VarChar(5)
-  weightUnit String @db.VarChar(2)
-  currency   String @db.VarChar(3)
-  color      String @db.VarChar(7)
-  theme      String @db.VarChar(5)
+  language   String  @db.VarChar(5)
+  weightUnit String  @db.VarChar(2)
+  currency   String  @db.VarChar(3)
+  color      String? @db.VarChar(7)
+  theme      String  @db.VarChar(5)
+  dateFormat String? @db.VarChar(16)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
