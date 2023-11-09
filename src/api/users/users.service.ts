@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { uuid } from '@tmw-universe/tmw-universe-types';
+import { Account, uuid } from '@tmw-universe/tmw-universe-types';
 import { UserRepository } from 'src/database/repositories/user.repository';
-import { UserProfileModel } from 'src/models/user/user-profile.model';
 
 @Injectable()
 export class UsersService {
@@ -21,14 +20,16 @@ export class UsersService {
       secondSurname: profile.secondSurname,
       email: profile.email,
       username: user.username,
+      birthDate: profile.birthDate,
       preferences: {
         color: preferences?.color,
         theme: preferences?.theme,
         language: preferences?.language,
         currency: preferences?.currency,
         weightUnit: preferences?.weightUnit,
+        dateFormat: preferences?.dateFormat,
       },
-    } as UserProfileModel;
+    } as Account;
   }
 
   async getUserById(userId: uuid) {
