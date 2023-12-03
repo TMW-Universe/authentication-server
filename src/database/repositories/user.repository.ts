@@ -1,7 +1,7 @@
-import { RepositoryOptions } from 'src/types/database/repository/repository-options.interface';
 import { Injectable } from '@nestjs/common';
 import { uuid } from '@tmw-universe/tmw-universe-types';
 import { DatabaseService } from '../database.service';
+import { RepositoryOptions } from '../../types/database/repository/repository-options.interface';
 
 @Injectable()
 export class UserRepository {
