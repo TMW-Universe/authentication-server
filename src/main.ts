@@ -5,11 +5,17 @@ import * as pj from './info.json';
 import { getEnv } from './utils/config/get-env';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppModule } from './app.module';
+import * as fs from 'fs';
 
 async function bootstrap() {
   const { openApi, cors, helmet: helmetEnabled, port } = getEnv();
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    httpsOptions: {
+      key: fs.readFileSync('/app/certificates/key.pem'),
+      cert: fs.readFileSync('/app/certificates/cert.pem'),
+    },
+  });
 
   // Enable CORS
   if (cors) {

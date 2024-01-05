@@ -12,5 +12,6 @@ services:
       - '9000:9000'
     volumes:
       - ./src:/app/src
+      - ./certificates:/app/certificates
     expose:
       - '9000'
