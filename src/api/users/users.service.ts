@@ -1,8 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Account, uuid } from '@tmw-universe/tmw-universe-types';
 import { UserRepository } from 'src/database/repositories/user.repository';
-import { UpdateUserProfileName } from '../../dtos/users/update-user-profile.name.dto';
+import { UpdateUserProfileNameDTO } from '../../dtos/users/update-user-profile.name.dto';
 import { UserProfileRepository } from '../../database/repositories/user-profile.repository';
+import { UpdateUserProfileBirthdateDTO } from '../../dtos/users/update-user-profile-birthdate.dto';
 
 @Injectable()
 export class UsersService {
@@ -49,11 +50,20 @@ export class UsersService {
 
   async updateUserProfileName(
     userId: uuid,
-    userProfileName: UpdateUserProfileName,
+    userProfileName: UpdateUserProfileNameDTO,
   ) {
     return await this.userProfileRepository.updateProfileByUserId(
       userId,
       userProfileName,
     );
+  }
+
+  async updateUserProfileBirthdate(
+    userId: uuid,
+    { birthdate: birthDate }: UpdateUserProfileBirthdateDTO,
+  ) {
+    return await this.userProfileRepository.updateProfileByUserId(userId, {
+      birthDate,
+    });
   }
 }

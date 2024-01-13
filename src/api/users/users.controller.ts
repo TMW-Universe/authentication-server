@@ -2,7 +2,8 @@ import { Body, Controller, Get, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/decorators/user/user.decorator';
 import { User as UserModel } from '@prisma/client';
-import { UpdateUserProfileName } from '../../dtos/users/update-user-profile.name.dto';
+import { UpdateUserProfileNameDTO } from '../../dtos/users/update-user-profile.name.dto';
+import { UpdateUserProfileBirthdateDTO } from '../../dtos/users/update-user-profile-birthdate.dto';
 
 @Controller('users')
 export class UsersController {
@@ -14,10 +15,18 @@ export class UsersController {
   }
 
   @Put('profile/name')
-  async updateUserProfile(
+  async updateUserProfileName(
     @User() { id }: UserModel,
-    @Body() body: UpdateUserProfileName,
+    @Body() body: UpdateUserProfileNameDTO,
   ) {
     return await this.usersService.updateUserProfileName(id, body);
+  }
+
+  @Put('profile/birthdate')
+  async updateUserProfileBirthdate(
+    @User() { id }: UserModel,
+    @Body() body: UpdateUserProfileBirthdateDTO,
+  ) {
+    return await this.usersService.updateUserProfileBirthdate(id, body);
   }
 }

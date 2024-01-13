@@ -1,6 +1,6 @@
 import { IsString, MaxLength, MinLength } from 'class-validator';
 
-export class UpdateUserProfileName {
+export class UpdateUserProfileNameDTO {
   @IsString()
   @MinLength(2)
   @MaxLength(32)
