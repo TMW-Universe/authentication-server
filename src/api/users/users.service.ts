@@ -1,10 +1,15 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Account, uuid } from '@tmw-universe/tmw-universe-types';
 import { UserRepository } from 'src/database/repositories/user.repository';
+import { UpdateUserProfileName } from '../../dtos/users/update-user-profile.name.dto';
+import { UserProfileRepository } from '../../database/repositories/user-profile.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UserRepository) {}
+  constructor(
+    private readonly usersRepository: UserRepository,
+    private readonly userProfileRepository: UserProfileRepository,
+  ) {}
 
   async getUserProfile(userId: string) {
     const user = await this.getUserAndProfileAndPreferencesById(userId);
@@ -39,6 +44,16 @@ export class UsersService {
   async getUserAndProfileAndPreferencesById(userId: uuid) {
     return await this.usersRepository.findUserByIdIncludingProfileAndPreferences(
       userId,
+    );
+  }
+
+  async updateUserProfileName(
+    userId: uuid,
+    userProfileName: UpdateUserProfileName,
+  ) {
+    return await this.userProfileRepository.updateProfileByUserId(
+      userId,
+      userProfileName,
     );
   }
 }

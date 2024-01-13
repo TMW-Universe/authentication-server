@@ -8,14 +8,25 @@ import { AppModule } from './app.module';
 import * as fs from 'fs';
 
 async function bootstrap() {
-  const { openApi, cors, helmet: helmetEnabled, port } = getEnv();
+  const {
+    openApi,
+    cors,
+    helmet: helmetEnabled,
+    port,
+    https: useHttps,
+  } = getEnv();
 
-  const app = await NestFactory.create(AppModule, {
-    httpsOptions: {
-      key: fs.readFileSync('/app/certificates/key.pem'),
-      cert: fs.readFileSync('/app/certificates/cert.pem'),
-    },
-  });
+  const app = await NestFactory.create(
+    AppModule,
+    useHttps
+      ? {
+          httpsOptions: {
+            key: fs.readFileSync('/app/certificates/key.pem'),
+            cert: fs.readFileSync('/app/certificates/cert.pem'),
+          },
+        }
+      : undefined,
+  );
 
   // Enable CORS
   if (cors) {

@@ -43,6 +43,7 @@ export const getEnv = (): EnvFile => {
     port: getNumberFromString(env.PORT, 9000),
     helmet: getBooleanFromString(env.HELMET, true),
     dev: getBooleanFromString(env.DEV, false),
+    https: getBooleanFromString(env.HTTPS, true),
   };
 };
 
@@ -63,6 +64,7 @@ interface EnvFile {
   helmet: boolean;
 
   dev: boolean;
+  https: boolean;
 }
 
 class RawEnvFile {
@@ -82,4 +84,5 @@ class RawEnvFile {
   ALLOW_SELF_PASSWORD_RECOVERY?: string;
 
   DEV?: string;
+  HTTPS?: string;
 }
