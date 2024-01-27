@@ -37,3 +37,5 @@ lerna-debug.log*
 
 *.pem
 *.key
+*.csr
+*.crt
