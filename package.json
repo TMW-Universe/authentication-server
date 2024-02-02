@@ -27,7 +27,7 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.2",
     "@nestjs/platform-express": "^10.2.5",
-    "@nestjs/swagger": "^7.1.11",
+    "@nestjs/swagger": "^7.2.0",
     "@nestjs/throttler": "^5.0.0",
     "@prisma/client": "^5.8.1",
     "@tmw-universe/tmw-universe-types": "^1.1.0",
