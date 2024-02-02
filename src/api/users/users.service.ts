@@ -1,9 +1,14 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { Account, uuid } from '@tmw-universe/tmw-universe-types';
 import { UserRepository } from 'src/database/repositories/user.repository';
 import { UpdateUserProfileNameDTO } from '../../dtos/users/update-user-profile.name.dto';
 import { UserProfileRepository } from '../../database/repositories/user-profile.repository';
 import { UpdateUserProfileBirthdateDTO } from '../../dtos/users/update-user-profile-birthdate.dto';
+import { calculatePasswordScore } from '../../utils/passwords/calsulate-password-score.util';
 
 @Injectable()
 export class UsersService {
@@ -65,5 +70,9 @@ export class UsersService {
     return await this.userProfileRepository.updateProfileByUserId(userId, {
       birthDate,
     });
+  }
+
+  async updateAccountPassword(userId: uuid, password: string) {
+    if (calculatePasswordScore(password) < 5) throw new BadRequestException();
   }
 }
