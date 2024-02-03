@@ -11,6 +11,7 @@ import { UserProfileRepository } from '../../database/repositories/user-profile.
 import { UpdateUserProfileBirthdateDTO } from '../../dtos/users/update-user-profile-birthdate.dto';
 import { calculatePasswordScore } from '../../utils/passwords/calsulate-password-score.util';
 import { AuthService } from '../auth/auth.service';
+import { hashWithSalt } from '../../utils/cryptography/cryptography';
 
 @Injectable()
 export class UsersService {
@@ -85,5 +86,10 @@ export class UsersService {
     // Check if currentPassword is the real password
     if (!(await this.authService.validatePassword(userId, currentPassword)))
       throw new UnauthorizedException();
+
+    const hashedPassword = hashWithSalt(password);
+    await this.usersRepository.updateUserById(userId, {
+      password: hashedPassword,
+    });
   }
 }
