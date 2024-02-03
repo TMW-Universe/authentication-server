@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Account, uuid } from '@tmw-universe/tmw-universe-types';
 import { UserRepository } from 'src/database/repositories/user.repository';
@@ -9,12 +10,14 @@ import { UpdateUserProfileNameDTO } from '../../dtos/users/update-user-profile.n
 import { UserProfileRepository } from '../../database/repositories/user-profile.repository';
 import { UpdateUserProfileBirthdateDTO } from '../../dtos/users/update-user-profile-birthdate.dto';
 import { calculatePasswordScore } from '../../utils/passwords/calsulate-password-score.util';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly usersRepository: UserRepository,
     private readonly userProfileRepository: UserProfileRepository,
+    private readonly authService: AuthService,
   ) {}
 
   async getUserProfile(userId: string) {
@@ -72,7 +75,15 @@ export class UsersService {
     });
   }
 
-  async updateAccountPassword(userId: uuid, password: string) {
+  async updateAccountPassword(
+    userId: uuid,
+    currentPassword: string,
+    password: string,
+  ) {
     if (calculatePasswordScore(password) < 5) throw new BadRequestException();
+
+    // Check if currentPassword is the real password
+    if (!(await this.authService.validatePassword(userId, currentPassword)))
+      throw new UnauthorizedException();
   }
 }

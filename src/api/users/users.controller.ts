@@ -34,8 +34,12 @@ export class UsersController {
   @Put('account/password')
   async updateAccountPassword(
     @User() { id }: UserModel,
-    @Body() { password }: UpdateAccountPasswordDTO,
+    @Body() { password, currentPassword }: UpdateAccountPasswordDTO,
   ) {
-    return await this.usersService.updateAccountPassword(id, password);
+    return await this.usersService.updateAccountPassword(
+      id,
+      currentPassword,
+      password,
+    );
   }
 }

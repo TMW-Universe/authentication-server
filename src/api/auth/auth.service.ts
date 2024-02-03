@@ -70,6 +70,11 @@ export class AuthService {
     }
   }
 
+  async validatePassword(userId: uuid, password: string) {
+    const user = await this.userRepository.findUserById(userId);
+    return compareHashWithSalt(user.password, password);
+  }
+
   async log(type: LogType, userId: uuid, request: Request, ip: string) {
     return await this.logRepository.create({
       type,
