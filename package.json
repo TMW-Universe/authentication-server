@@ -30,7 +30,7 @@
     "@nestjs/swagger": "^7.2.0",
     "@nestjs/throttler": "^5.1.2",
     "@prisma/client": "^5.8.1",
-    "@tmw-universe/tmw-universe-types": "^1.1.0",
+    "@tmw-universe/tmw-universe-types": "^1.5.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "date-fns": "^3.2.0",
